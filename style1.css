@@ -1,0 +1,292 @@
+/* вынести все цвета в css(даже для рисования в скрипте) */
+/* root - селектор-псевдокласс, указывает на <html>. Внутри root все глобальное */
+:root {
+    --canvas-figure-fill: #cccf99;
+    --canvas-figure-stroke: #1b4332;
+    --canvas-axis: #081c15;
+    --canvas-hit: #2d6a4f;
+    --canvas-miss: #b00020;
+}
+
+body {
+    background-color: #f7fbf8;
+    font-family: 'Times New Roman', cursive, serif;
+    line-height: 1.5;
+    color: #1b4332;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    font-family: 'Times New Roman', cursive, serif;
+    font-style: italic;
+    color: #d8f3dc;
+    font-size: 1.6rem;
+    background-color: #081c15;
+    text-align: center;
+    padding: 22px 35px;
+    margin: 0 0 25px 0;
+    line-height: 1.35;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 25px auto;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.canvas-section {
+    text-align: center;
+}
+
+.form-fieldset {
+    padding: 20px 25px;
+    min-width: 320px;
+}
+
+
+legend {
+    color: #1b4332;
+    padding: 8px;
+
+    background-color: #ffffff;
+    padding: 0 8px;
+    color: #1b4332;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 5%;
+    padding: 1% 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 2%;
+    color: #2d6a4f;
+}      
+select,input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #74c69d;
+    box-sizing: border-box;
+    font-family: inherit; /*наследование шрифта*/
+    font-size: 1rem;
+    background-color: #c0ff9a;
+    color: #081c15;
+}
+
+/* селекторы псевдоклассов
+   :focus, :hover, :active, :nth-child */
+select:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: #1b4332;
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.25);
+}
+
+/* селекторы псевдоэлементов
+   ::placeholder */
+input[type="text"]::placeholder {
+    color: #95d5b2;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+/* каскадирование */
+button {
+    background-color: #2d6a4f;
+    color: #ffffff;
+    border: 1px solid #1b4332;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #1b4332;
+}
+
+button:active {
+    background-color: #081c15;
+}
+
+button.clear-btn,
+#clearBtn {
+    background-color: #e8f5e9;
+    color: #1b4332;
+    border: 1px solid #40916c;
+    margin-top: 12px;
+    margin-bottom: 25px;
+}
+
+button.clear-btn:hover,
+#clearBtn:hover {
+    background-color: #c7e9ce;
+}
+
+/* селекторы ид ID Selectors
+   #coordinateCanvas, #checkForm, #resultTableBody, #interactivePiano  */
+#coordinateCanvas {
+
+    cursor: crosshair;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+#checkForm {
+    width: 100%;
+}
+
+.error-msg {
+    color: #b00020;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+    font-weight: 500;
+}
+
+/* таблица результатов*/
+.table-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #40916c;
+    background-color: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+th,
+td {
+    text-align: center;
+    border: 1px solid #91407d;
+    font-size: 0.95rem;
+
+}
+
+th {
+    background-color: #ade6b6;
+}
+
+table, th, td {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+tbody tr:nth-child(7n + 1) {
+    background-color: #ff8b8b; 
+}
+tbody tr:nth-child(7n + 2) {
+    background-color: #ffd67e;
+}
+tbody tr:nth-child(7n + 3) {
+    background-color: #fbff81;
+}
+tbody tr:nth-child(7n + 4) {
+    background-color: #85ff83; 
+}
+tbody tr:nth-child(7n + 5) {
+    background-color: #81fffd; 
+}
+tbody tr:nth-child(7n + 6) {
+    background-color: #90c9ff; 
+}
+tbody tr:nth-child(7n + 0) {
+    background-color: #d3a1ff; 
+}
+
+tbody tr:hover {
+    background-color: #b6c6bb; /* цвет при наведении мыши */
+}
+
+.hit-yes {
+    color: #1b4332;
+}
+
+.hit-no {
+    color: #6f0014;
+}
+
+/* (Web Audio API */
+.piano-section {
+    max-width: 1200px;
+    margin: 30px auto 20px auto;
+    box-sizing: border-box;
+}
+
+.piano-label {
+    font-size: 0.95rem;
+    color: #1b4332;
+    margin-bottom: 8px;
+}
+
+.piano-container {
+    background: #111e18;
+    border: 1px solid #40916c;
+    overflow-x: auto;
+}
+
+.piano {
+    display: flex;
+    position: relative;
+    background-color: #081c15;
+    width: max-content;
+    margin: 0 auto;
+    user-select: none;
+}
+
+/* Белые */
+.key {
+    width: 36px;
+    height: 160px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    box-sizing: border-box;
+    z-index: 1;
+    transition: background-color 0.05s;
+}
+
+.key:active,
+.key.active {
+    background-color: #d8f3dc;
+    height: 158px;
+}
+
+/* Черные */
+.key.black {
+    width: 22px;
+    height: 98px;
+    background-color: #081c15;
+    border: 1px solid #000000;
+    margin-left: -11px;
+    margin-right: -11px;
+    z-index: 2;
+}
+
+.key.black:active,
+.key.black.active {
+    background-color: #40916c;
+    height: 96px;
+}

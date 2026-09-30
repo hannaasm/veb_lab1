@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб Лабораторная работа 1 Вариант 22707</title>
+    <link rel="stylesheet" href="style1.css">
+
+
+    <!-- <script src="script.js" defer></script>
+      -->
+    <script type="module" src="script1.js" defer></script>
+</head>
+
+<body>
+    <header>
+        Асьминкина Анна Алексеевна<br>
+        группа P3230<br>
+        вариант 22707
+    </header>
+
+    <div class="main-content">
+        <!--  график Canvas -->
+        <div class="canvas-section" id="canvas-container">
+            <canvas id="coordinateCanvas" width="440" height="440"></canvas>
+        </div>
+
+        <fieldset class="form-fieldset">
+            <h3>Ввод координат</h3>
+            <form id="checkForm" novalidate>
+                <!-- X -->
+                <div class="form-group">
+                    <label for="field_x">X:</label>
+                    <select id="field_x" name="x">
+                        <option value="-2">-2</option>
+                        <option value="-1.5">-1.5</option>
+                        <option value="-1">-1</option>
+                        <option value="-0.5">-0.5</option>
+                        <option value="0" selected>0</option>
+                        <option value="0.5">0.5</option>
+                        <option value="1">1</option>
+                        <option value="1.5">1.5</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+                <!-- Y -->
+                <div class="form-group">
+                    <label for="field_y">Y (-5 ... 5):</label>
+                    <input type="text" id="field_y" name="y" placeholder="Число от -5 до 5" autocomplete="off">
+                    <div id="y-error" class="error-msg">Значение Y должно быть числом в диапазоне от -5 до 5!</div>
+                </div>
+
+                <!-- R -->
+                <div class="form-group">
+                    <label for="field_r">R:</label>
+                    <select id="field_r" name="r">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submitBtn">Проверить</button>
+            </form>
+        </fieldset>
+    </div>
+
+    <!-- Таблица -->
+    <div class="table-section">
+        <table>
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Результат</th>
+                    <th>Дата и время</th>
+                </tr>
+            </thead>
+            <tbody id="resultTableBody">
+                <!-- щаполняется скриптом -->
+            </tbody>
+        </table>
+        <div>
+            <button type="button" class="clear-btn" id="clearBtn">Очистить историю</button>
+        </div>
+    </div>
+
+    <!-- Web Audio API -->
+    <div class="piano-section">
+        <div class="piano-label">💚</div>
+        <div class="piano-container">
+            <div class="piano" id="interactivePiano">
+                <!--клавиши через JavaScript -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
