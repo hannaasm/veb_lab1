@@ -30,12 +30,12 @@ const startOctave = 3;
 const endOctave = 5;
 const pianoContainer = document.getElementById('interactivePiano');
 
-function getFrequency(noteIndexInOctave, octave) {
+function getFrequency(noteIndexInOctave, octave) { // частота звука
     const midiNumber = (octave + 1) * 12 + noteIndexInOctave;
-    return 440 * Math.pow(2, (midiNumber - 69) / 12);
+    return 440 * Math.pow(2, (midiNumber - 69) / 12); // 69-A(440). 
 }
 
-function playNote(frequency) {
+function playNote(frequency) {  // Web Audio API
     const ctx = getAudioContext();
     const oscillator = ctx.createOscillator();
     const gainNode = ctx.createGain();
@@ -53,7 +53,7 @@ function playNote(frequency) {
     oscillator.stop(ctx.currentTime + 1.2);
 }
 
-if (pianoContainer) {
+if (pianoContainer) { //  Генерация интерфейса клавиш (DOM). Цикл проходится по октавам и массиву нот, создавая элементы div для каждой клавиши
     for (let octave = startOctave; octave <= endOctave; octave++) {
         notePattern.forEach((note, index) => {
             const key = document.createElement('div');
@@ -94,15 +94,20 @@ try {
 }
 
 function checkHit(x, y, r) {
-    // 1. Первая четверть: сектор круга (x >= 0, y >= 0)
+    //if R < 0 => неккоректно т.к. x**2 + y**2 <= r**2
+
+    // 1. Первая четверть
+    //  сектор круга (x >= 0, y >= 0)
     if (x >= 0 && y >= 0 && (x * x + y * y <= r * r)) {
         return true;
     }
-    // 2. Вторая четверть: прямоугольник (-R/2 <= x <= 0, 0 <= y <= R)
+    // 2. Вторая четверть
+    //  прямоугольник (-R/2 <= x <= 0, 0 <= y <= R)
     if (x <= 0 && y >= 0 && (x >= -r / 2) && (y <= r)) {
         return true;
     }
-    // 3. Третья четверть: треугольник (x <= 0, y <= 0)
+    // 3. Третья четверть
+    //  треугольник (x <= 0, y <= 0)
     if (x <= 0 && y <= 0 && (x >= -r / 2) && (y >= -r) && (y >= -2 * x - r)) {
         return true;
     }
@@ -119,11 +124,12 @@ function drawCanvas() {
     const missColor = rootStyles.getPropertyValue('--canvas-miss').trim();
 
     const r = parseFloat(rSelect.value) || 2;
-    const width = canvas.width;
+                                    // масштаб:
+    const width = canvas.width;     // Физическая ширина canvas в пикселях
     const height = canvas.height;
-    const cx = width / 2;
-    const cy = height / 2;
-    const scale = (cx * 0.72) / r;
+    const cx = width / 2;           //  Центр canvas по оси X
+    const cy = height / 2;          // Центр canvas по оси Y
+    const scale = (cx * 0.72) / r;  // Масштабный коэффициент
 
     ctx.clearRect(0, 0, width, height);
 
@@ -200,7 +206,9 @@ function drawCanvas() {
 
     ctx.strokeStyle = axisColor;
     ctx.lineWidth = 1.2;
-
+// массив ticks
+// переменная scale влияет на позиционирование текста меток R, -R относительно центра canvas:
+// переменная scale задает масштабный коэффициент перевода абстрактных единиц радиуса R в пиксели экрана относительно центра (cx, cy). Чем больше scale, тем дальше от центра canvas располагаются метки 'R' и '-R'
     ticks.forEach(t => {
         const posX = cx + t.val * scale;
         ctx.beginPath();
@@ -236,6 +244,10 @@ function drawCanvas() {
 }
 
 function formatDateTimeRu(timestamp) {
+
+    // метод toLocaleString
+    // Время изменится, так как объект Date в JavaScript всегда хранит время в UTC, а toLocaleString автоматически конвертирует его в локальное время системы.
+    // Метод Date.now() (и создание объекта new Date(timestamp)) сохраняет абсолютную временную метку (количество миллисекунд, прошедших с эпохи Unix в UTC). Метод toLocaleString('ru-RU', ...) берёт эту универсальную временную точку и отображает её с учётом текущей системной временной зоны устройства пользователя, поэтому при изменении часового пояса на устройстве отображаемое время сдвинется.
     if (!timestamp) return "—";
     const d = new Date(timestamp);
     if (isNaN(d.getTime())) return String(timestamp);

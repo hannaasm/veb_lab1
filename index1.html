@@ -28,7 +28,8 @@
 
         <fieldset class="form-fieldset">
             <h3>Ввод координат</h3>
-            <form id="checkForm" novalidate>
+            <form id="checkForm" novalidate> 
+                <!--  -->
                 <!-- X -->
                 <div class="form-group">
                     <label for="field_x">X:</label>
@@ -48,8 +49,8 @@
                 <!-- Y -->
                 <div class="form-group">
                     <label for="field_y">Y (-5 ... 5):</label>
-                    <input type="text" id="field_y" name="y" placeholder="Число от -5 до 5" autocomplete="off">
-                    <div id="y-error" class="error-msg">Значение Y должно быть числом в диапазоне от -5 до 5!</div>
+                    <input type="text" id="field_y" name="y" placeholder="Число от -5 до 5" autocomplete="off" maxlength="1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000">
+                    <div id="y-error" class="error-msg">Значение Y должно быть числом в диапазоне от -5 до 5! (4.9999... тоже можно, разрешаю)</div>
                 </div>
 
                 <!-- R -->
@@ -89,6 +90,7 @@
             <button type="button" class="clear-btn" id="clearBtn">Очистить историю</button>
         </div>
     </div>
+
 
     <!-- Web Audio API -->
     <div class="piano-section">
