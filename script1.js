@@ -198,10 +198,14 @@ function drawCanvas() {
     // Засечки и метки
     ctx.font = "12px 'Times New Roman', serif";
     const ticks = [
-        { val: r, label: "R" },
-        { val: r / 2, label: "R/2" },
-        { val: -r / 2, label: "-R/2" },
-        { val: -r, label: "-R" }
+        // { val: r, label: "R" },
+        // { val: r / 2, label: "R/2" },
+        // { val: -r / 2, label: "-R/2" },
+        // { val: -r, label: "-R" }
+        { val: r, label: r.toString() },
+        { val: r / 2, label: (r / 2).toString() },
+        { val: -r / 2, label: (-r / 2).toString() },
+        { val: -r, label: (-r).toString() }
     ];
 
     ctx.strokeStyle = axisColor;
