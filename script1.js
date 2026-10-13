@@ -124,12 +124,22 @@ function drawCanvas() {
     const missColor = rootStyles.getPropertyValue('--canvas-miss').trim();
 
     const r = parseFloat(rSelect.value) || 2;
+
+    // Находим максимальную по модулю координату среди R и всех добавленных точек, чтобы график автоматически масштабировался и все точки всегда были видны
+    let maxCoord = r;
+    results.forEach(pt => {
+        const absX = Math.abs(pt.x);
+        const absY = Math.abs(pt.y);
+        if (!isNaN(absX) && absX > maxCoord) maxCoord = absX;
+        if (!isNaN(absY) && absY > maxCoord) maxCoord = absY;
+    });
+
                                     // масштаб:
     const width = canvas.width;     // Физическая ширина canvas в пикселях
     const height = canvas.height;
     const cx = width / 2;           //  Центр canvas по оси X
     const cy = height / 2;          // Центр canvas по оси Y
-    const scale = (cx * 0.72) / r;  // Масштабный коэффициент
+    const scale = (cx * 0.72) / maxCoord;  // Масштабный коэффициент с учетом R и точек
 
     ctx.clearRect(0, 0, width, height);
 
