@@ -79,6 +79,8 @@ const xSelect = document.getElementById('field_x');
 const yInput = document.getElementById('field_y');
 const rSelect = document.getElementById('field_r');
 const yError = document.getElementById('y-error');
+const xError = document.getElementById('x-error');
+const rError = document.getElementById('r-error');
 const tableBody = document.getElementById('resultTableBody');
 const clearBtn = document.getElementById('clearBtn');
 
@@ -123,7 +125,7 @@ function drawCanvas() {
     const hitColor = rootStyles.getPropertyValue('--canvas-hit').trim();
     const missColor = rootStyles.getPropertyValue('--canvas-miss').trim();
 
-    const r = parseFloat(rSelect.value) || 2;
+    const r = Math.abs(parseFloat(rSelect.value) || 2); // тут по ммодулю улюлю
 
     // Находим максимальную по модулю координату среди R и всех добавленных точек, чтобы график автоматически масштабировался и все точки всегда были видны
     let maxCoord = r;
@@ -352,10 +354,27 @@ form.addEventListener('submit', (e) => {
     const x = parseFloat(xSelect.value);
     const r = parseFloat(rSelect.value);
 
-    if (isNaN(x) || isNaN(r)) {
-        alert('Ошибка выбора X или R');
-        return;
+    let valid = true;
+
+    if (isNaN(x)) {
+        xError.textContent = 'nan Ошибка выбора X !!!!!!!!!!!!!!!!!!!';
+        xError.style.display = 'block';
+        valid = false;
+        // alert('Ошибка выбора X или R');
+        // return;
     }
+    
+
+    if (isNaN(r)) {
+        rError.textContent = 'nan Ошибка выбора R!!!!!!!!!!!!!!!!!!!';
+        rError.style.display = 'block';
+        valid = false;
+        // alert('Ошибка выбора X или R');
+        // return;
+    }
+
+    if (!valid)
+        return;
 
     const hit = checkHit(x, y, r);
     const timestamp = Date.now();
